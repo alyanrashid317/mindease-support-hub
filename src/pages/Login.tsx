@@ -22,7 +22,7 @@ export default function Login() {
 
     try {
       await login(email, password);
-      navigate('/chat');
+      navigate('/dashboard');
     } catch (err) {
       setError('Invalid email or password. Please try again.');
     } finally {
@@ -32,7 +32,7 @@ export default function Login() {
 
   const handleGuestAccess = () => {
     loginAsGuest();
-    navigate('/chat');
+    navigate('/dashboard');
   };
 
   return (

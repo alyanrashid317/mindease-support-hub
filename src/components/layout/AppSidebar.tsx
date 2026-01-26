@@ -23,9 +23,11 @@ import {
   Heart,
   History,
   User,
+  LayoutDashboard,
 } from 'lucide-react';
 
 const menuItems = [
+  { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
   { title: 'Chat', url: '/chat', icon: MessageCircle },
   { title: 'Mood Tracking', url: '/mood', icon: SmilePlus },
   { title: 'Progress', url: '/progress', icon: BarChart3 },
