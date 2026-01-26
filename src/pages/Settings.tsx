@@ -9,10 +9,13 @@ import { Switch } from '@/components/ui/switch';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { toast } from '@/hooks/use-toast';
+import { Moon, Sun, Monitor } from 'lucide-react';
 
 export default function Settings() {
   const { user, isGuest } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [textSize, setTextSize] = useState('medium');
   const [highContrast, setHighContrast] = useState(false);
   const [textToSpeech, setTextToSpeech] = useState(false);
@@ -54,6 +57,45 @@ export default function Settings() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* Appearance */}
+              <Card className="card-calm border-border/50">
+                <CardHeader>
+                  <CardTitle>Appearance</CardTitle>
+                  <CardDescription>Customize how MindEase looks</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <Label>Theme</Label>
+                    <div className="grid grid-cols-3 gap-3">
+                      <Button
+                        variant={theme === 'light' ? 'default' : 'outline'}
+                        className="flex flex-col gap-2 h-auto py-4"
+                        onClick={() => setTheme('light')}
+                      >
+                        <Sun className="h-5 w-5" />
+                        <span className="text-xs">Light</span>
+                      </Button>
+                      <Button
+                        variant={theme === 'dark' ? 'default' : 'outline'}
+                        className="flex flex-col gap-2 h-auto py-4"
+                        onClick={() => setTheme('dark')}
+                      >
+                        <Moon className="h-5 w-5" />
+                        <span className="text-xs">Dark</span>
+                      </Button>
+                      <Button
+                        variant={theme === 'system' ? 'default' : 'outline'}
+                        className="flex flex-col gap-2 h-auto py-4"
+                        onClick={() => setTheme('system')}
+                      >
+                        <Monitor className="h-5 w-5" />
+                        <span className="text-xs">System</span>
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Accessibility */}
               <Card className="card-calm border-border/50">
