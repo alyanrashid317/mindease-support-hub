@@ -31,7 +31,7 @@ export default function SignUp() {
 
     try {
       await signup(name, email, password);
-      navigate('/chat');
+      navigate('/dashboard');
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -41,7 +41,7 @@ export default function SignUp() {
 
   const handleGuestAccess = () => {
     loginAsGuest();
-    navigate('/chat');
+    navigate('/dashboard');
   };
 
   return (
