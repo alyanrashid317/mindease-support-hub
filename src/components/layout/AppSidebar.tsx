@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import {
   MessageCircle,
   SmilePlus,
@@ -24,6 +25,8 @@ import {
   History,
   User,
   LayoutDashboard,
+  Moon,
+  Sun,
 } from 'lucide-react';
 
 const menuItems = [
@@ -44,12 +47,17 @@ export function AppSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout, isGuest } = useAuth();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -140,15 +148,30 @@ export function AppSidebar() {
             </div>
           </div>
         )}
-        <Button
-          variant="ghost"
-          size={collapsed ? 'icon' : 'default'}
-          onClick={handleLogout}
-          className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-sidebar-accent"
-        >
-          <LogOut className="h-4 w-4" />
-          {!collapsed && <span className="ml-2">Sign out</span>}
-        </Button>
+        <div className={`flex ${collapsed ? 'flex-col' : 'flex-row'} gap-2`}>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="text-muted-foreground hover:text-foreground hover:bg-sidebar-accent"
+            title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {resolvedTheme === 'dark' ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </Button>
+          <Button
+            variant="ghost"
+            size={collapsed ? 'icon' : 'default'}
+            onClick={handleLogout}
+            className={`${collapsed ? '' : 'flex-1'} justify-start text-muted-foreground hover:text-foreground hover:bg-sidebar-accent`}
+          >
+            <LogOut className="h-4 w-4" />
+            {!collapsed && <span className="ml-2">Sign out</span>}
+          </Button>
+        </div>
       </SidebarFooter>
     </Sidebar>
   );
