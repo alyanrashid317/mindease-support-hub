@@ -105,30 +105,30 @@ export function AppSidebar() {
 
         {/* Chat History (only for authenticated users) */}
         {!isGuest && !collapsed && (
-          <SidebarGroup>
-            <SidebarGroupLabel className="flex items-center gap-2">
-              <History className="h-3 w-3" />
-              Recent Chats
-            </SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {chatHistory.map((chat) => (
-                  <SidebarMenuItem key={chat.id}>
-                    <SidebarMenuButton asChild>
-                      <button className="flex flex-col items-start gap-0.5 w-full py-2">
-                        <span className="text-sm truncate w-full text-left">
-                          {chat.title}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {chat.date}
-                        </span>
-                      </button>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel className="flex items-center gap-2 text-sidebar-foreground font-medium">
+            <History className="h-3 w-3" />
+            Recent Chats
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {chatHistory.map((chat) => (
+                <SidebarMenuItem key={chat.id}>
+                  <SidebarMenuButton asChild>
+                    <button className="flex flex-col items-start gap-0.5 w-full py-2">
+                      <span className="text-sm font-medium truncate w-full text-left text-sidebar-foreground">
+                        {chat.title}
+                      </span>
+                      <span className="text-xs text-sidebar-foreground/80">
+                        {chat.date}
+                      </span>
+                    </button>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
         )}
       </SidebarContent>
 
